@@ -1,0 +1,100 @@
+.root {
+    -fx-background-color: #edeef0;
+}
+
+.chart-plot-background {
+    -fx-background-color: #edeef0;
+}
+
+.petrobox-header {
+    -fx-text-fill: #656565;
+    -fx-font-weight: 700;
+}
+
+.petrobox-content {
+
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * ScrollPane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.scroll-pane {
+    -fx-background-color: #edeef0;
+}
+
+.scroll-pane > * {
+    -fx-background-color: #edeef0;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * TitledPane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.titled-pane > .title {
+    -fx-background-color: white;
+    -fx-border-color: #dce1e6;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.titled-pane > .title > .arrow-button {
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+.titled-pane > *.content {
+    -fx-background-color: white;
+    -fx-border-color: #dce1e6;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-mark-color;
+    -fx-border-color: -fx-mark-color;
+    -fx-effect: dropshadow(one-pass-box, transparent, 0, 0, 0, 0)
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Button                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+
+.button {
+    -fx-background-color: #5f9cec;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.button:hover {
+    -fx-background-color: #4079c5;
+}
+
+.button:focused {
+
+}
+
+.axis:left {
+    -fx-min-width: 16px;
+    -fx-pref-width: 16px;
+    -fx-max-width: 16px;
+}
+
+.default-color0.chart-area-symbol { -fx-background-color: #FF9200, white; }
+.default-color1.chart-area-symbol { -fx-background-color: #0180E2, white; }
+
+.default-color0.chart-series-area-line { -fx-stroke: #FF9200; }
+.default-color1.chart-series-area-line { -fx-stroke: #0180E2; }
+
+.default-color0.chart-series-area-fill { -fx-fill: #FF920044; }
+.default-color1.chart-series-area-fill { -fx-fill: #0180E244; }
