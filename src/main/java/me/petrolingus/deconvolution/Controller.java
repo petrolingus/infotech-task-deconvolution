@@ -1,4 +1,4 @@
-package me.petrolingus;
+package me.petrolingus.deconvolution;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.AreaChart;

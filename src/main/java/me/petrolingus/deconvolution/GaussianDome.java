@@ -1,4 +1,4 @@
-package me.petrolingus;
+package me.petrolingus.deconvolution;
 
 import javafx.scene.control.TextField;
 

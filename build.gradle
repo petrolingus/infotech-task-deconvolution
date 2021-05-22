@@ -16,7 +16,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'me.petrolingus.Main'
+    mainClassName = 'me.petrolingus.deconvolution.Main'
 }
 
 javafx {
