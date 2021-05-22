@@ -167,7 +167,6 @@
                    </TitledPane>
                    <Button fx:id="createSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#generateSignal" text="Создать сигнал и импульс" />
                <Button fx:id="createRandomSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPressRandomValues" text="Новый случайный сигнал" />
-               <Button fx:id="createRecoveredSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onGenerateRandomDeconvolution" text="Новый восстановленный сигнал" />
                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Найти деконволюцию" />
                <TitledPane prefWidth="256.0" text="Деконволюция">
                   <VBox.margin>

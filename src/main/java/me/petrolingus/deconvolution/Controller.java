@@ -37,7 +37,6 @@ public class Controller {
 
     public Button createSignalButton;
     public Button createRandomSignalButton;
-    public Button createRecoveredSignalButton;
 
     public Button deconvolutionButton;
     public TextField functionalValueField;
@@ -58,7 +57,6 @@ public class Controller {
 
         createSignalButton.disableProperty().bind(task.runningProperty());
         createRandomSignalButton.disableProperty().bind(task.runningProperty());
-        createRecoveredSignalButton.disableProperty().bind(task.runningProperty());
         deconvolutionButton.disableProperty().bind(task.runningProperty());
     }
 
@@ -234,6 +232,7 @@ public class Controller {
     }
 
     public void onDeconvolution() {
+        onGenerateRandomDeconvolution();
         if (!task.isRunning) {
             task.signalChart = signalChart;
             task.convolutionChart = convolutionChart;
