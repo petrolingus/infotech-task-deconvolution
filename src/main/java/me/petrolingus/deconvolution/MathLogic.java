@@ -169,12 +169,6 @@ public class MathLogic extends Service<Void> {
 
                 isRunning = false;
 
-                Platform.runLater(() -> {
-                    ImageView imageView = new ImageView("icons/play.png");
-                    imageView.setViewport(new Rectangle2D(1, 1, 24, 24));
-                    deconvolutionButton.setGraphic(imageView);
-                });
-
                 return null;
             }
         };

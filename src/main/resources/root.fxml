@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -15,8 +14,6 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -167,7 +164,7 @@
                    </TitledPane>
                    <Button fx:id="createSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#generateSignal" text="Создать сигнал и импульс" />
                <Button fx:id="createRandomSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPressRandomValues" text="Новый случайный сигнал" />
-               <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Найти деконволюцию" />
+               <Button fx:id="deconvolutionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeconvolution" text="Найти деконволюцию" />
                <TitledPane prefWidth="256.0" text="Деконволюция">
                   <VBox.margin>
                      <Insets />
@@ -175,18 +172,6 @@
                   <content>
                      <VBox spacing="4.0">
                         <children>
-                               <Button fx:id="deconvolutionButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#onDeconvolution" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #CFD8DC;">
-                              <graphic>
-                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                       <Image url="@icons/play.png" />
-                                    </image>
-                                    <viewport>
-                                       <Rectangle2D height="24.0" minX="1.0" width="24.0" />
-                                    </viewport>
-                                 </ImageView>
-                              </graphic>
-                           </Button>
                            <TextField fx:id="functionalValueField" editable="false" prefWidth="250.0" />
                            <TextField fx:id="counterField" editable="false" prefWidth="250.0" />
                         </children>

@@ -239,9 +239,6 @@ public class Controller {
             fillDataArrays();
             task.reset();
             task.start();
-            ImageView imageView = new ImageView("icons/pause.png");
-            imageView.setViewport(new Rectangle2D(1, 1, 24, 24));
-            deconvolutionButton.setGraphic(imageView);
             task.isRunning = !task.isRunning;
         }
     }
