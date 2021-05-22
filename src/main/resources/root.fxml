@@ -141,7 +141,7 @@
                            </HBox>
                        </VBox>
                    </TitledPane>
-                   <TitledPane expanded="false" prefWidth="256.0" text="Дополнительные параметры">
+                   <TitledPane prefWidth="256.0" text="Дополнительные параметры">
                        <VBox spacing="4.0">
                      <HBox>
                         <children>
@@ -160,24 +160,41 @@
                            <PasswordField editable="false" visible="false" />
                         </children>
                      </HBox>
+                     <HBox>
+                        <children>
+                           <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Точность" />
+                           <TextField fx:id="accuracyTextField" text="1.0E-10" />
+                        </children>
+                     </HBox>
                        </VBox>
                    </TitledPane>
                    <Button fx:id="createSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#generateSignal" text="Создать сигнал и импульс" />
                <Button fx:id="createRandomSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPressRandomValues" text="Новый случайный сигнал" />
                <Button fx:id="deconvolutionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeconvolution" text="Найти деконволюцию" />
-               <TitledPane prefWidth="256.0" text="Деконволюция">
-                  <VBox.margin>
-                     <Insets />
-                  </VBox.margin>
-                  <content>
-                     <VBox spacing="4.0">
-                        <children>
-                           <TextField fx:id="functionalValueField" editable="false" prefWidth="250.0" />
-                           <TextField fx:id="counterField" editable="false" prefWidth="250.0" />
-                        </children>
-                     </VBox>
-                  </content>
-               </TitledPane>
+               <HBox>
+                  <children>
+                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Длина вектора h" />
+                     <TextField fx:id="functionalValueField" editable="false" HBox.hgrow="ALWAYS" />
+                  </children>
+               </HBox>
+               <HBox>
+                  <children>
+                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Функционал" />
+                     <TextField editable="false" HBox.hgrow="ALWAYS" />
+                  </children>
+               </HBox>
+               <HBox>
+                  <children>
+                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Отклонение" />
+                     <TextField editable="false" HBox.hgrow="ALWAYS" />
+                  </children>
+               </HBox>
+               <HBox>
+                  <children>
+                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Итераций" />
+                     <TextField fx:id="counterField" editable="false" HBox.hgrow="ALWAYS" />
+                  </children>
+               </HBox>
                </VBox>
          </content>
         </ScrollPane>

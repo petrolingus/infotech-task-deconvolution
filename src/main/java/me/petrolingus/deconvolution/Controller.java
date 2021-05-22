@@ -34,6 +34,7 @@ public class Controller {
     public TextField samplesCountField;
     public TextField noisePercentField;
     public CheckBox noiseCheckBox;
+    public TextField accuracyTextField;
 
     public Button createSignalButton;
     public Button createRandomSignalButton;
