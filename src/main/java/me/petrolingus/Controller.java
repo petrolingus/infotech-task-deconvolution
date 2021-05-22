@@ -43,12 +43,9 @@ public class Controller {
     public TextField functionalValueField;
     public TextField counterField;
 
-    public Button stopButton;
-
     public AreaChart<Number, Number> signalChart;
     public AreaChart<Number, Number> impulseChart;
     public AreaChart<Number, Number> convolutionChart;
-    public AreaChart<Number, Number> chart;
 
     final MathLogic task = new MathLogic();
 
@@ -58,12 +55,11 @@ public class Controller {
         task.counterField = counterField;
 
         generateSignal();
-        //onGenerateRandomDeconvolution();
-        //fillDataArrays();
 
         createSignalButton.disableProperty().bind(task.runningProperty());
         createRandomSignalButton.disableProperty().bind(task.runningProperty());
         createRecoveredSignalButton.disableProperty().bind(task.runningProperty());
+        deconvolutionButton.disableProperty().bind(task.runningProperty());
     }
 
     public void generateSignal() {
@@ -238,7 +234,6 @@ public class Controller {
     }
 
     public void onDeconvolution() {
-
         if (!task.isRunning) {
             task.signalChart = signalChart;
             task.convolutionChart = convolutionChart;
@@ -291,7 +286,6 @@ public class Controller {
     }
 
     public void onPressRandomValues() {
-
         int n = Integer.parseInt(samplesCountField.getText());
         GaussianDome.getRandom(amplitude1, sigma1, mu1, n);
         GaussianDome.getRandom(amplitude2, sigma2, mu2, n);
@@ -299,57 +293,4 @@ public class Controller {
         generateSignal();
     }
 
-    public void onStopButton() {
-    }
-
-    public void foo() {
-
-        // Получение числа количества отсчетов из поля в окне
-        int n = Integer.parseInt(samplesCountField.getText());
-
-        int id = 0;
-
-        XYChart.Series<Number, Number> temp = new XYChart.Series<>();
-
-        for (int k = 0; k < 100; k++) {
-            double x = k * 0.01;
-            task.startPoint[id] = x;
-
-            // Создание восстановленного сигнала на основе множителей Лагранжа {lambdas}
-            XYChart.Series<Number, Number> recoveredSignal = new XYChart.Series<>();
-            for (int i = 0; i < n; i++) {
-                double value = -1;
-                for (int j = 0; j < n; j++) {
-                    double hi = impulseChart.getData().get(0).getData().get((n - j + i) % n).getYValue().doubleValue();
-                    value -= task.startPoint[j] * hi;
-                }
-                recoveredSignal.getData().add(new XYChart.Data<>(i, Math.exp(value)));
-            }
-
-            // Создание свертки востановленного сигнала {recoveredSignal} с импульсной характеристикой {impulse}
-            XYChart.Series<Number, Number> recoveredConvolutionSignal = new XYChart.Series<>();
-            for (int i = 0; i < n; i++) {
-                double sum = 0;
-                for (int j = 0; j < n; j++) {
-                    double a = recoveredSignal.getData().get(j).getYValue().doubleValue();
-                    double b = impulseChart.getData().get(0).getData().get((n - j + i) % n).getYValue().doubleValue();
-                    sum += a * b;
-                }
-                recoveredConvolutionSignal.getData().add(new XYChart.Data<>(i, sum));
-            }
-
-            // Рассчет суммы квадратов разностей двух сверток
-            task.startDeviation = 0;
-            for (int i = 0; i < n; i++) {
-                double a = convolutionChart.getData().get(0).getData().get(i).getYValue().doubleValue();
-                double b = recoveredConvolutionSignal.getData().get(i).getYValue().doubleValue();
-                task.startDeviation += (a - b) * (a - b);
-            }
-
-            temp.getData().add(new XYChart.Data<>(x, task.startDeviation));
-        }
-
-        chart = createChart(temp);
-
-    }
 }
