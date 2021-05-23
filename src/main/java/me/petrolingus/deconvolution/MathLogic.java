@@ -1,22 +1,23 @@
 package me.petrolingus.deconvolution;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+
+import java.util.Arrays;
 
 public class MathLogic extends Service<Void> {
 
     public AreaChart<Number, Number> signalChart;
     public AreaChart<Number, Number> convolutionChart;
 
-    public Button deconvolutionButton;
+    public TextField vectorLengthField;
     public TextField functionalValueField;
+    public TextField deviationField;
     public TextField counterField;
 
     public double[] impulseData;
@@ -26,8 +27,7 @@ public class MathLogic extends Service<Void> {
 
     public double[] startPoint;
     public double startDeviation;
-
-    boolean isDebug = false;
+    public double accuracy;
 
     public boolean isRunning = false;
 
@@ -36,8 +36,6 @@ public class MathLogic extends Service<Void> {
         return new Task<>() {
             @Override
             protected Void call() {
-
-                System.out.println("NEW TASK WAS CREATED");
 
                 int n = startPoint.length;
 
@@ -58,21 +56,13 @@ public class MathLogic extends Service<Void> {
                 double lastDeviation;
 
                 double[] hi = new double[n];
-                for (int i = 0; i < n; i++) {
-                    hi[i] = 1.0;
-                }
+                Arrays.fill(hi, 1.0);
 
                 int counter = 0;
 
-                System.out.println("1 dec:" + startDeviation);
+                int innerCounter = 0;
 
                 while (!isCancelled()) {
-
-                    counter++;
-
-                    if (isDebug) {
-                        System.out.println("ITERATION " + counter);
-                    }
 
                     for (int i = 0; i < n; i++) {
                         double temp = currDeviation;
@@ -94,16 +84,11 @@ public class MathLogic extends Service<Void> {
                         hLength += Math.pow(hi[i], 2);
                     }
 
-                    if (hLength < 1.0E-10) {
+                    if (hLength < accuracy) {
                         break;
                     }
 
-                    if (isDebug) {
-                        System.out.println("2 dec:" + currDeviation);
-                    }
-
                     do {
-
                         for (int i = 0; i < n; i++) {
                             double value = prevPoint[i] + 2 * (currPoint[i] - prevPoint[i]);
                             nextPoint[i] = value;
@@ -111,10 +96,6 @@ public class MathLogic extends Service<Void> {
                         }
                         nextDeviation = calculateConvolution(nextPoint);
                         lastDeviation = nextDeviation;
-
-                        if (isDebug) {
-                            System.out.println("3 dec:" + nextDeviation);
-                        }
 
                         for (int i = 0; i < n; i++) {
                             double temp = lastDeviation;
@@ -130,10 +111,6 @@ public class MathLogic extends Service<Void> {
                             }
                         }
 
-                        if (isDebug) {
-                            System.out.println("4 dec:" + lastDeviation);
-                        }
-
                         System.arraycopy(currPoint, 0, prevPoint, 0, n);
                         prevDeviation = currDeviation;
                         if (lastDeviation < currDeviation) {
@@ -142,11 +119,16 @@ public class MathLogic extends Service<Void> {
                         } else {
                             break;
                         }
+                        int finalInnerCounter = innerCounter;
+                        Platform.runLater(() -> {
+                            counterField.setText(String.valueOf(finalInnerCounter));
+                        });
+                        innerCounter++;
+                    } while (!isCancelled());
 
-                    } while (true);
-
-                    int finalCounter = counter;
+                    int finalCounter = counter++;
                     double finalPrevDeviation = prevDeviation;
+                    double finalHLength = hLength;
                     Platform.runLater(() -> {
                         XYChart.Series<Number, Number> recoveredSignal = new XYChart.Series<>();
                         for (int i = 0; i < n; i++) {
@@ -160,8 +142,10 @@ public class MathLogic extends Service<Void> {
                         }
                         signalChart.getData().set(1, recoveredSignal);
                         convolutionChart.getData().set(1, recoveredConvolutionSignal);
+                        vectorLengthField.setText(String.valueOf(finalHLength));
                         functionalValueField.setText(String.valueOf(finalPrevDeviation));
-                        counterField.setText(String.valueOf(finalCounter));
+                        deviationField.setText(String.valueOf(calculateFoo()));
+                        //counterField.setText(String.valueOf(finalCounter));
                     });
 
                     Thread.yield();
@@ -172,6 +156,18 @@ public class MathLogic extends Service<Void> {
                 return null;
             }
         };
+    }
+
+    private double calculateFoo() {
+        ObservableList<XYChart.Data<Number, Number>> data1 = signalChart.getData().get(0).getData();
+        ObservableList<XYChart.Data<Number, Number>> data2 = signalChart.getData().get(1).getData();
+        double result = 0;
+        for (int i = 0; i < data1.size(); i++) {
+            double a1 = data1.get(i).getYValue().doubleValue();
+            double a2 = data2.get(i).getYValue().doubleValue();
+            result += Math.pow(a1 - a2, 2);
+        }
+        return result;
     }
 
     private double calculateConvolution(double[] point) {

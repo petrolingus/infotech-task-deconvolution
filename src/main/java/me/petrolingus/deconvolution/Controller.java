@@ -1,14 +1,13 @@
 package me.petrolingus.deconvolution;
 
-import javafx.geometry.Rectangle2D;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import org.apache.commons.math3.analysis.function.Gaussian;
 
 import java.util.Random;
 
@@ -38,9 +37,12 @@ public class Controller {
 
     public Button createSignalButton;
     public Button createRandomSignalButton;
-
     public Button deconvolutionButton;
+    public Button deconvolutionStopButton;
+
+    public TextField vectorLengthField;
     public TextField functionalValueField;
+    public TextField deviationField;
     public TextField counterField;
 
     public AreaChart<Number, Number> signalChart;
@@ -50,8 +52,9 @@ public class Controller {
     final MathLogic task = new MathLogic();
 
     public void initialize() {
-        task.deconvolutionButton = deconvolutionButton;
+        task.vectorLengthField = vectorLengthField;
         task.functionalValueField = functionalValueField;
+        task.deviationField = deviationField;
         task.counterField = counterField;
 
         generateSignal();
@@ -59,6 +62,7 @@ public class Controller {
         createSignalButton.disableProperty().bind(task.runningProperty());
         createRandomSignalButton.disableProperty().bind(task.runningProperty());
         deconvolutionButton.disableProperty().bind(task.runningProperty());
+        deconvolutionStopButton.disableProperty().bind(task.runningProperty().not());
     }
 
     public void generateSignal() {
@@ -66,26 +70,17 @@ public class Controller {
         // Получение числа количества отсчетов из поля в окне
         int n = Integer.parseInt(samplesCountField.getText());
 
+        Gaussian gaussian1 = createGaussian(amplitude1, sigma1, mu1);
+        Gaussian gaussian2 = createGaussian(amplitude2, sigma2, mu2);
+        Gaussian gaussian3 = createGaussian(amplitude3, sigma3, mu3);
+
         // Создание входного сигнала
         XYChart.Series<Number, Number> signal = new XYChart.Series<>();
         for (int i = 0; i < n; i++) {
             double x = 1.0 * i;
-
-            double a1 = Double.parseDouble(amplitude1.getText());
-            double s1 = Double.parseDouble(sigma1.getText());
-            double m1 = Double.parseDouble(mu1.getText());
-            double y1 = a1 * Math.exp(-((x - m1) * (x - m1)) / (2 * s1 * s1));
-
-            double a2 = Double.parseDouble(amplitude2.getText());
-            double s2 = Double.parseDouble(sigma2.getText());
-            double m2 = Double.parseDouble(mu2.getText());
-            double y2 = a2 * Math.exp(-((x - m2) * (x - m2)) / (2 * s2 * s2));
-
-            double a3 = Double.parseDouble(amplitude3.getText());
-            double s3 = Double.parseDouble(sigma3.getText());
-            double m3 = Double.parseDouble(mu3.getText());
-            double y3 = a3 * Math.exp(-((x - m3) * (x - m3)) / (2 * s3 * s3));
-
+            double y1 = gaussian1.value(x);
+            double y2 = gaussian2.value(x);
+            double y3 = gaussian3.value(x);
             signal.getData().add(new XYChart.Data<>(i, y1 + y2 + y3));
         }
         if (signalChart == null) {
@@ -98,23 +93,14 @@ public class Controller {
             }
         }
 
+        Gaussian impulseGaussian = createGaussian(impulseAmplitude, impulseSigma, new TextField("0"));
+
         // Создание импульсной характеристики
         XYChart.Series<Number, Number> impulse = new XYChart.Series<>();
         for (int i = 0; i < n; i++) {
-
-            double a = Double.parseDouble(impulseAmplitude.getText());
-            double s = Double.parseDouble(impulseSigma.getText());
-            double m = 0;
-
-            if (i < n / 2) {
-                double x = 1.0 * i;
-                double y = a * Math.exp(-((x - m) * (x - m)) / (2 * s * s));
-                impulse.getData().add(new XYChart.Data<>(i, y));
-            } else {
-                double x = 1.0 * (i - n);
-                double y = a * Math.exp(-((x - m) * (x - m)) / (2 * s * s));
-                impulse.getData().add(new XYChart.Data<>(i, y));
-            }
+            double x = (i < n / 2) ? 1.0 * i : 1.0 * (i - n);
+            double y = impulseGaussian.value(x);
+            impulse.getData().add(new XYChart.Data<>(i, y));
         }
         impulseChart = createChart(impulse);
         chartBox.getChildren().set(1, impulseChart);
@@ -235,6 +221,7 @@ public class Controller {
     public void onDeconvolution() {
         onGenerateRandomDeconvolution();
         if (!task.isRunning) {
+            task.accuracy = Double.parseDouble(accuracyTextField.getText());
             task.signalChart = signalChart;
             task.convolutionChart = convolutionChart;
             fillDataArrays();
@@ -288,6 +275,18 @@ public class Controller {
         GaussianDome.getRandom(amplitude2, sigma2, mu2, n);
         GaussianDome.getRandom(amplitude2, sigma3, mu3, n);
         generateSignal();
+    }
+
+    public void onDeconvolutionStop() {
+        task.cancel();
+        task.reset();
+    }
+
+    private Gaussian createGaussian(TextField amplitude, TextField sigma, TextField mu) {
+        double a = Double.parseDouble(amplitude.getText());
+        double s = Double.parseDouble(sigma.getText());
+        double m = Double.parseDouble(mu.getText());
+        return new Gaussian(a, m, s);
     }
 
 }
