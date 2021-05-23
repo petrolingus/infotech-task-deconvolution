@@ -52,152 +52,148 @@
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
         <ScrollPane fitToWidth="true" minWidth="274.0" prefWidth="274.0">
             <HBox.margin>
-                <Insets />
+                <Insets/>
             </HBox.margin>
-         <content>
-               <VBox spacing="8.0">
-                   <padding>
-                       <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                   </padding>
-                   <TitledPane expanded="false" prefWidth="256.0" text="Параметры куполов">
-                       <VBox spacing="8.0">
-                     <VBox spacing="4.0">
-                        <children>
-                           <Label styleClass="petrobox-header" text="Купол 1" />
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Амплитуда" />
-                                     <TextField fx:id="amplitude1" text="4.0" />
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Отклонение" />
-                                     <TextField fx:id="sigma1" text="4.0" />
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Медиана" />
-                                     <TextField fx:id="mu1" text="8.0" />
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                                 </HBox>
-                        </children>
-                     </VBox>
-                     <VBox spacing="4.0">
-                        <children>
-                           <Label styleClass="petrobox-header" text="Купол 2" />
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Амплитуда" />
-                                     <TextField fx:id="amplitude2" text="2.0" />
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Отклонение" />
-                                     <TextField fx:id="sigma2" text="3.0" />
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Медиана" />
-                                     <TextField fx:id="mu2" text="30.0" />
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                                 </HBox>
-                        </children>
-                     </VBox>
-                     <VBox spacing="4.0">
-                        <children>
-                           <Label styleClass="petrobox-header" text="Купол 3" />
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Амплитуда" />
-                                     <TextField fx:id="amplitude3" text="3.5" />
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Отклонение" />
-                                     <TextField fx:id="sigma3" text="5.0" />
-                                 </HBox>
-                                 <HBox>
-                                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Медиана" />
-                                     <TextField fx:id="mu3" text="40.0" />
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                                 </HBox>
-                        </children>
-                     </VBox>
-                       </VBox>
-                   </TitledPane>
-                   <TitledPane expanded="false" prefWidth="256.0" text="Импульсная характеристика">
-                       <VBox spacing="4.0">
-                           <HBox>
-                               <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Амплитуда" />
-                               <TextField fx:id="impulseAmplitude" text="1.0" />
-                           </HBox>
-                           <HBox>
-                               <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Отклонение" />
-                               <TextField fx:id="impulseSigma" text="3.0" />
-                           </HBox>
-                       </VBox>
-                   </TitledPane>
-                   <TitledPane prefWidth="256.0" text="Дополнительные параметры">
-                       <VBox spacing="4.0">
-                     <HBox>
-                        <children>
-                           <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Число семплов" />
-                           <TextField fx:id="samplesCountField" text="50" />
-                        </children>
-                     </HBox>
-                           <HBox>
-                               <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Процент шума" />
-                               <TextField fx:id="noisePercentField" text="1" />
-                           </HBox>
-                     <HBox>
-                        <children>
-                           <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Шум" />
-                           <CheckBox fx:id="noiseCheckBox" maxHeight="1.7976931348623157E308" mnemonicParsing="false" />
-                           <PasswordField editable="false" visible="false" />
-                        </children>
-                     </HBox>
-                     <HBox>
-                        <children>
-                           <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Точность" />
-                           <TextField fx:id="accuracyTextField" text="1.0E-10" />
-                        </children>
-                     </HBox>
-                       </VBox>
-                   </TitledPane>
-                   <Button fx:id="createSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#generateSignal" text="Создать сигнал и импульс" />
-               <Button fx:id="createRandomSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPressRandomValues" text="Новый случайный сигнал" />
-               <Button fx:id="deconvolutionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeconvolution" text="Найти деконволюцию" />
-               <Button fx:id="deconvolutionStopButton" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onDeconvolutionStop" text="Остановить поиск" />
-               <HBox>
-                  <children>
-                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Длина вектора h" />
-                     <TextField fx:id="vectorLengthField" editable="false" HBox.hgrow="ALWAYS" />
-                  </children>
-               </HBox>
-               <HBox>
-                  <children>
-                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Функционал" />
-                     <TextField fx:id="functionalValueField" editable="false" HBox.hgrow="ALWAYS" />
-                  </children>
-               </HBox>
-               <HBox>
-                  <children>
-                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Отклонение" />
-                     <TextField fx:id="deviationField" editable="false" HBox.hgrow="ALWAYS" />
-                  </children>
-               </HBox>
-               <HBox>
-                  <children>
-                     <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content" text="Итераций" />
-                     <TextField fx:id="counterField" editable="false" HBox.hgrow="ALWAYS" />
-                  </children>
-               </HBox>
-               </VBox>
-         </content>
+            <VBox spacing="8.0">
+                <padding>
+                    <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                </padding>
+                <TitledPane expanded="false" prefWidth="256.0" text="Параметры куполов">
+                    <VBox spacing="8.0">
+                        <VBox spacing="4.0">
+                            <Label styleClass="petrobox-header" text="Купол 1"/>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Амплитуда"/>
+                                <TextField fx:id="amplitude1" text="4.0"/>
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Отклонение"/>
+                                <TextField fx:id="sigma1" text="4.0"/>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Медиана"/>
+                                <TextField fx:id="mu1" text="8.0"/>
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </HBox>
+                        </VBox>
+                        <VBox spacing="4.0">
+                            <Label styleClass="petrobox-header" text="Купол 2"/>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Амплитуда"/>
+                                <TextField fx:id="amplitude2" text="2.0"/>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Отклонение"/>
+                                <TextField fx:id="sigma2" text="3.0"/>
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Медиана"/>
+                                <TextField fx:id="mu2" text="30.0"/>
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </HBox>
+                        </VBox>
+                        <VBox spacing="4.0">
+                            <Label styleClass="petrobox-header" text="Купол 3"/>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Амплитуда"/>
+                                <TextField fx:id="amplitude3" text="3.5"/>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Отклонение"/>
+                                <TextField fx:id="sigma3" text="5.0"/>
+                            </HBox>
+                            <HBox>
+                                <Label maxHeight="1.7976931348623157E308" minWidth="100.0"
+                                       styleClass="petrobox-content" text="Медиана"/>
+                                <TextField fx:id="mu3" text="40.0"/>
+                                <VBox.margin>
+                                    <Insets/>
+                                </VBox.margin>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                </TitledPane>
+                <TitledPane expanded="false" prefWidth="256.0" text="Импульсная характеристика">
+                    <VBox spacing="4.0">
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Амплитуда"/>
+                            <TextField fx:id="impulseAmplitude" text="1.0"/>
+                        </HBox>
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Отклонение"/>
+                            <TextField fx:id="impulseSigma" text="3.0"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                <TitledPane prefWidth="256.0" text="Дополнительные параметры">
+                    <VBox spacing="4.0">
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Число семплов"/>
+                            <TextField fx:id="samplesCountField" text="50"/>
+                        </HBox>
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Процент шума"/>
+                            <TextField fx:id="noisePercentField" text="1"/>
+                        </HBox>
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Шум"/>
+                            <CheckBox fx:id="noiseCheckBox" maxHeight="1.7976931348623157E308"
+                                      mnemonicParsing="false"/>
+                            <PasswordField editable="false" visible="false"/>
+                        </HBox>
+                        <HBox>
+                            <Label maxHeight="1.7976931348623157E308" minWidth="100.0" text="Точность"/>
+                            <TextField fx:id="accuracyTextField" text="1.0E-10"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+                <Button fx:id="createSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                        onAction="#generateSignal" text="Создать сигнал и импульс"/>
+                <Button fx:id="createRandomSignalButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                        onAction="#onPressRandomValues" text="Новый случайный сигнал"/>
+                <Button fx:id="deconvolutionButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
+                        onAction="#onDeconvolution" text="Найти деконволюцию"/>
+                <Button fx:id="deconvolutionStopButton" disable="true" maxWidth="1.7976931348623157E308"
+                        mnemonicParsing="false" onAction="#onDeconvolutionStop" text="Остановить поиск"/>
+                <HBox>
+                    <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content"
+                           text="Длина вектора h"/>
+                    <TextField fx:id="vectorLengthField" editable="false" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <HBox>
+                    <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content"
+                           text="Функционал"/>
+                    <TextField fx:id="functionalValueField" editable="false" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <HBox>
+                    <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content"
+                           text="Отклонение"/>
+                    <TextField fx:id="deviationField" editable="false" HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <HBox>
+                    <Label maxHeight="1.7976931348623157E308" minWidth="100.0" styleClass="petrobox-content"
+                           text="Итераций"/>
+                    <TextField fx:id="counterField" editable="false" HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
         </ScrollPane>
         <VBox fx:id="chartBox" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
             <AreaChart maxWidth="1.7976931348623157E308">
