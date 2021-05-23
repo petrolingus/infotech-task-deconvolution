@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" spacing="1.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.petrolingus.deconvolution.Controller">
+<VBox prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.petrolingus.deconvolution.Controller">
     <MenuBar VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="Файл">
             <MenuItem mnemonicParsing="false" text="New" />
@@ -50,7 +50,7 @@
         </Menu>
     </MenuBar>
     <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <ScrollPane fitToWidth="true" minWidth="240.0">
+        <ScrollPane fitToWidth="true" minWidth="274.0" prefWidth="274.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
